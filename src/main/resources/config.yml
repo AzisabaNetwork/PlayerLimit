@@ -1,0 +1,4 @@
+# max players (-1 to disable)
+maxPlayers: -1
+# shown when non-op player tries to join the server when player count is >= maxPlayers
+message: "&cサーバーは満員です!"
