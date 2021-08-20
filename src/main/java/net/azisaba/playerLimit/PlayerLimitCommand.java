@@ -17,6 +17,8 @@ public class PlayerLimitCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
+            String s = PlayerLimit.getInstance().maxPlayers == -1 ? "無制限" : (PlayerLimit.getInstance().maxPlayers + "人");
+            sender.sendMessage(ChatColor.GREEN + "現在の最大人数: " + s);
             sender.sendMessage(ChatColor.RED + "> " + ChatColor.GREEN + "/playerlimit set <new value>");
             sender.sendMessage(ChatColor.RED + "> " + ChatColor.GREEN + "/playerlimit reset");
             sender.sendMessage(ChatColor.RED + "> " + ChatColor.GREEN + "/playerlimit reload");
@@ -26,6 +28,8 @@ public class PlayerLimitCommand implements TabExecutor {
             case "reload":
                 PlayerLimit.getInstance().reload();
                 sender.sendMessage(ChatColor.GREEN + "設定を再読み込みしました。");
+                String s = PlayerLimit.getInstance().maxPlayers == -1 ? "無制限" : (PlayerLimit.getInstance().maxPlayers + "人");
+                sender.sendMessage(ChatColor.GREEN + "現在の最大人数は" + s + "です。");
                 break;
             case "reset":
                 PlayerLimit.getInstance().maxPlayers = -1;
@@ -38,8 +42,8 @@ public class PlayerLimitCommand implements TabExecutor {
                         int newValue = Integer.parseInt(args[1]);
                         PlayerLimit.getInstance().maxPlayers = newValue;
                         PlayerLimit.getInstance().saveConfigAsync();
-                        String s = newValue == -1 ? "無制限" : (newValue + "人");
-                        sender.sendMessage(ChatColor.GREEN + "人数制限を" + s + "に設定しました。");
+                        String sus = newValue == -1 ? "無制限" : (newValue + "人");
+                        sender.sendMessage(ChatColor.GREEN + "人数制限を" + sus + "に設定しました。");
                         return true;
                     } catch (NumberFormatException ignore) {
                     }
