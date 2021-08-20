@@ -2,6 +2,7 @@ package net.azisaba.playerLimit.listener;
 
 import net.azisaba.playerLimit.PlayerLimit;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -13,7 +14,7 @@ public class PlayerPreLoginListener implements Listener {
         if (Bukkit.getOfflinePlayer(e.getUniqueId()).isOp()) return;
         int max = PlayerLimit.getInstance().maxPlayers;
         if (max != -1 && Bukkit.getOnlinePlayers().size() >= max) {
-            e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, PlayerLimit.getInstance().message);
+            e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatColor.translateAlternateColorCodes('&', PlayerLimit.getInstance().message));
         }
     }
 }

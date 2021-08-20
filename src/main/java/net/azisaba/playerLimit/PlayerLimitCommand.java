@@ -29,6 +29,7 @@ public class PlayerLimitCommand implements TabExecutor {
                 break;
             case "reset":
                 PlayerLimit.getInstance().maxPlayers = -1;
+                PlayerLimit.getInstance().saveConfigAsync();
                 sender.sendMessage(ChatColor.GREEN + "人数制限を無制限に設定しました。");
                 break;
             case "set":
@@ -36,6 +37,7 @@ public class PlayerLimitCommand implements TabExecutor {
                     try {
                         int newValue = Integer.parseInt(args[1]);
                         PlayerLimit.getInstance().maxPlayers = newValue;
+                        PlayerLimit.getInstance().saveConfigAsync();
                         String s = newValue == -1 ? "無制限" : (newValue + "人");
                         sender.sendMessage(ChatColor.GREEN + "人数制限を" + s + "に設定しました。");
                         return true;
