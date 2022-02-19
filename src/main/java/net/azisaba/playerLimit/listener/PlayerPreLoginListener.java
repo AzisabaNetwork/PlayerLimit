@@ -15,7 +15,7 @@ public class PlayerPreLoginListener implements Listener {
         OfflinePlayer op = Bukkit.getOfflinePlayer(e.getUniqueId());
         if (op.isOp() || PlayerLimit.getInstance().hasPermission(op, "playerlimit.bypass")) return;
         int max = PlayerLimit.getInstance().maxPlayers;
-        if (max != -1 && Bukkit.getOnlinePlayers().size() >= max) {
+        if (max != -1 && Bukkit.getOnlinePlayers().stream().filter(p -> !p.hasPermission("playerlimit.bypass")).count() >= max) {
             e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatColor.translateAlternateColorCodes('&', PlayerLimit.getInstance().message));
         }
     }
