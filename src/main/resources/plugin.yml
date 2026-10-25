@@ -1,10 +1,14 @@
 name: PlayerLimit
 main: net.azisaba.playerLimit.PlayerLimit
-version: 1.1.0
-api-version: 1.13
+version: ${version}
+api-version: '1.19'
+folia-supported: true
+softdepend: [Vault]
 commands:
   playerlimit:
     permission: playerlimit.command
 permissions:
+  playerlimit.command:
+    default: op
   playerlimit.bypass:
     default: op
